@@ -46,6 +46,14 @@ app.get('/ie', (request, response) => {
 })
 
 
+app.get('/timeout', (request, response) => {
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    setTimeout(() => {
+        response.send("Hello timeout, I come here after 2 sec ...");
+    }, 2000)
+})
 
 
 app.listen(3000, () => {
