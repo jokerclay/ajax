@@ -38,6 +38,12 @@ app.get('/server-json', (request, response) => {
     response.send(data);
 })
 
+app.get('/ie', (request, response) => {
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send("Hello IE - 4");
+})
 
 
 
