@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置一个按钮终止 AJAX 请求</title>
+</head>
+
+<body>
+    <h3>设置一个按钮终止 AJAX 请求</h3>
+    <p>注意要在外面设置一个全局的对象</p>
+    <p>才能在两个按钮之间使用</p>
+    <button>发送请求</button>
+
+    <button>取消请求</button>
+
+    <script>
+        // 获取元素
+        const btns = document.getElementsByTagName('button');
+
+        let xhr = null;
+
+        btns[0].onclick = function() {
+            xhr = new XMLHttpRequest();
+
+            xhr.open('get', 'http://127.0.0.1:3000/timeout');
+
+            xhr.send();
+        }
+
+        btns[1].onclick = function() {
+            xhr.abort();
+        }
+    </script>
+</body>
+
+</html>

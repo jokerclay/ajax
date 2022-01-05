@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 超时或断网</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #035623
+        }
+    </style>
+</head>
+
+<body>
+    <p>对于 AJAX 请求超时 还或者用户网络出现问题</p>
+    <p>解决方案:</p>
+    <p>给用户适当的提醒，让用户体验更好</p>
+
+    <button>点击发送请求</button>
+    <div id="result">
+
+    </div>
+
+    <script>
+        // 获取 button
+        const btn = document.getElementsByTagName('button')[0];
+        // 获取 div
+        const result = document.querySelector('#result');
+
+        btn.addEventListener('click', function() {
+            // 1. 创建 xhr
+            const xhr = new XMLHttpRequest();
+
+            // 设置ajax 超时时间
+            xhr.timeout = 2000; // 如果  2s 之后还没有请求到，请求取消
+            // 设置当超时时会发生生么事
+            xhr.ontimeout = function() {
+                    alert("timeout");
+                }
+                // 设置当网络中断
+            xhr.onerror = function() {
+                alert("network not working ... try later");
+            }
+
+            // 2. 设置发送方式和路径
+            xhr.open('get', 'http://127.0.0.1:3000/timeout');
+
+            // 3. 发送
+            xhr.send();
+
+            // 4. 处理返回的状态
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response;
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

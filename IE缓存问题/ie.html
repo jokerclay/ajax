@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IE 缓存问题</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #26363b;
+        }
+    </style>
+</head>
+
+<body>
+    <p>IE 缓存问题是由于 IE 浏览器会把 AJAX 请求缓存到本地，以致于在 AJAX 在请求时出错</p>
+    <p>解决方案:</p>
+    <p>给每个 AJAX 请求添加时间戳</p>
+    <br>
+    <button>点击发送请求</button>
+    <div id="result">
+    </div>
+
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const result = document.querySelector("#result");
+        btn.addEventListener('click', function() {
+            // 1. 创建 xhr 对象
+            const xhr = new XMLHttpRequest();
+
+            // 2. 设置请求方式和请求路径 (URL)
+            xhr.open('get', 'http://127.0.0.1:3000/ie?t=' + Date.now()); // 加上时间戳,避免本地缓存的问题
+
+            // 3. 将请求发送
+            xhr.send();
+
+            // 4. 判返回的状态
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
