@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #155615
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 鼠标放到 div 上，收到 服务端 response -->
+
+    <h1>鼠标放到上面 获得请求</h1>
+    <div id="result">
+
+    </div>
+    <script>
+        // 1. 获取 方框元素
+        const result = document.getElementById("result");
+
+        // 2. 鼠标移入时
+        result.onmouseenter = function() {
+            console.log("testing working ..")
+
+            // ==== 发起 ajax 请求 ====
+
+            // 1. 创建 xhr
+            const xhr = new XMLHttpRequest();
+
+            // 2. 设置 请求方式 和 请求 URL (路径)
+            xhr.open('POST', 'http://127.0.0.1:3000/server');
+
+
+            // 设置请求头
+            // 接收两个参数 请求头，情求头的值
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            // 自定义也可以
+            xhr.setRequestHeader('name', 'my-name-test');
+            // 3. 发送 
+            // 传递参数,在 payload 中的 request payload 中查看
+            // 参数的另一种写法
+            xhr.send('a=100&b=200&c=300&A:100&B:200&C:300');
+
+            // 4. 判断状态
+            xhr.onreadystatechange = function() {
+                // (1) 判断是否全部接收到请求
+                // (2) 判断请求字符串
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(xhr.response);
+                        result.innerHTML = xhr.response;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

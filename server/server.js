@@ -3,12 +3,43 @@ const express = require('express');
 const app = express();
 
 
-app.get('/server', (request, response) => {
+// app.get('/server', (request, response) => {
+// 设置允许跨域
+//     response.setHeader('Access-Control-Allow-Origin', '*');
+
+//     response.send('Hello   ajax server');
+// })
+
+// app.post('/server', (request, response) => {
+//     设置允许跨域
+//     response.setHeader('Access-Control-Allow-Origin', '*');
+//     response.send('Hello ajax server POST');
+//     response.setHeader('Access-Control-Allow-Headers', '*');
+// })
+
+// 设置接收任意的请求
+app.all('/server', (request, response) => {
     // 设置允许跨域
     response.setHeader('Access-Control-Allow-Origin', '*');
-
-    response.send('Hello   ajax server');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send('Hello ajax server POST');
 })
+
+let data = {
+    "name": "clay",
+    "age": "18"
+}
+let output = JSON.stringify(data);
+
+app.get('/server-json', (request, response) => {
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send(data);
+})
+
+
+
 
 
 app.listen(3000, () => {
