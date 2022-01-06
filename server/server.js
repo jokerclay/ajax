@@ -2,7 +2,6 @@ const express = require('express');
 
 const app = express();
 
-
 // app.get('/server', (request, response) => {
 // 设置允许跨域
 //     response.setHeader('Access-Control-Allow-Origin', '*');
@@ -56,6 +55,26 @@ app.get('/timeout', (request, response) => {
 })
 
 
+//  JQuery
+
+app.get('/jq', (request, response) => {
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send("Hello Jquery");
+})
+
+app.post('/jq', (request, response) => {
+    let data = { 'name': 'clay' };
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send(data);
+})
+
+
+
 app.listen(3000, () => {
+
     console.log('server started , listening on 3000 ...');
 });

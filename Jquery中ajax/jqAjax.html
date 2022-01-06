@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <title>jQuery 中的 ajax</title>
+</head>
+
+<body>
+
+    <h1>jQuery 中的 ajax</h1>
+
+    <button type="button" class="btn btn-primary">GET</button>
+    <button type="button" class="btn btn-secondary">POST</button>
+    <button type="button" class="btn btn-success">通用方法ajax</button>
+
+    <script>
+        // Jquery 一共有 三个参数
+        // 1. 请求路径
+        // 2. 请求带的参数
+        // 3. 回调函数（其中的参数为请求体）
+        // 4. 返回类型
+
+        //  ==== jq get 请求 ====
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1:3000/jq', {a : 100,b : 200},function(data) {
+                    console.log(data);
+                });
+        });
+
+        //  ==== jq post 请求返回 json 格式 ====
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1:3000/jq', {a : 100,b : 200},function(data) {
+                    console.log(data);
+                });
+        });
+
+        //  ==== 通用方法 ajax ====
+        $('button').eq(3).click(function(){
+            $.ajax({
+                //  更多 Ajax 选项
+                // see more info 
+                // <a href='https://jquery.cuishifeng.cn/jQuery.Ajax.html'>
+                // 1. url
+                url: 'http://127.0.0.1:3000/jq',
+                // 2. 参数
+                data: {a:1,b2},
+                // 3. 请求类型
+                type: 'get',
+                // 4. 成功的反馈( 请求体的处理)
+                success:function(data) {
+                    console.log(data)
+                },
+                // 5. 是失败后的回调函数
+                error: function() {
+                    console.log("失败...")
+                },
+                // 6. 设置超时时间
+                timeout:2000,
+
+                // 7. 头信息
+                headers:{
+                    a:100,
+                    b:200,
+                }
+            })
+        });
+    </script>
+
+</body>
+
+</html>
