@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="https://cdn.bootcdn.net/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <title>axios</title>
+</head>
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>Ajax</button>
+
+    <script>
+
+        // 获取元素
+        const btns = document.getElementsByTagName('button');
+
+        // 配置 axios
+        axios.defaults.baseURL='http://127.0.0.1:3000';
+
+        console.log(axios)
+
+        // ==== get 请求 ====
+        btns[0].onclick = function() {
+            // GET 请求
+            axios.get('/axios',{
+                // URL 参数
+                params:{
+                    id:600,
+                    vip:7
+                },
+                // 请求头信息
+                headers:{
+                    name:'clay',
+                    age:20,
+                },
+            }).then(value => {
+                console.log(value)
+            } )
+        }
+
+
+        // ==== POST 请求 ====
+        btns[1].onclick = function() {
+
+            // POST 请求
+            // 第一个参数 URL
+            // 第二个参数 请求体
+            // 第三个参数 其他配置
+
+            axios.post('/axios',{
+                username:"john",
+                password:'doe'
+            },
+            {
+                // URL 参数
+                params:{
+                    id:600,
+                    vip:7
+                },
+
+                // 请求头信息
+                headers:{
+                    name:'clay',
+                    age:20,
+                },
+            })
+        };
+
+
+
+        // ==== 通用 请求 ====
+        btns[2].onclick = function() {
+            axios({
+                // 1. url
+                url:'/axios',
+                // 2. 请求方法
+                method:'POST',
+                // 3. URL 参数
+                params:{
+                    vip:7,
+                    levels:18,
+                },
+                // 4. 头信息
+                headers:{
+                    a:100,
+                    b:200,
+                },
+                // 5. 请求体
+                data: {
+                    username:'admin',
+                    password:'admin'
+                }
+
+            }).then(response =>{
+                console.log(response);
+                console.log(response.headers);
+                console.log(response.status);
+                console.log(response.statusText);
+            })
+        };
+
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+

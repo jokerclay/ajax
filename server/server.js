@@ -72,6 +72,15 @@ app.post('/jq', (request, response) => {
     response.send(data);
 })
 
+// ==== axios ====
+
+app.all('/axios', (request, response) => {
+    // let data = { 'name': 'clay' };
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send('Hello');
+})
 
 
 app.listen(3000, () => {
