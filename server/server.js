@@ -73,7 +73,6 @@ app.post('/jq', (request, response) => {
 })
 
 // ==== axios ====
-
 app.all('/axios', (request, response) => {
     // let data = { 'name': 'clay' };
     // 设置允许跨域
@@ -82,8 +81,23 @@ app.all('/axios', (request, response) => {
     response.send('Hello');
 })
 
+// ==== fetch ====
+app.all('/fetch', (request, response) => {
+    // let data = { 'name': 'clay' };
+    // 设置允许跨域
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    response.send('Hello');
+})
 
 app.listen(3000, () => {
-
     console.log('server started , listening on 3000 ...');
 });
+
+
+
+
+
+
+
+
