@@ -90,6 +90,21 @@ app.all('/fetch', (request, response) => {
     response.send('Hello');
 })
 
+// ==== 验证 script 返回的应该是 js 代码才能解析 ====
+app.all('/jsonp', (request, response) => {
+    // response.send('Hello');
+    // response.send("console.log('hello jsonp in server.js')");
+
+    // 数据
+    const data = {
+        "name": "clay",
+    }
+    // 处理数据
+    //      转为字符串
+    let str =JSON.stringify(data);
+    response.send(`handleData(${str})`);
+})
+
 app.listen(3000, () => {
     console.log('server started , listening on 3000 ...');
 });

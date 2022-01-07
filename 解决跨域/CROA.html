@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            height: 100px;
+            width: 100px;
+            border: solid 1px #75b;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <h1>JSONP</h1>
+    <pre>
+        1. JSONP 是什么 ?
+            JSONP: json with padding  是一个非官方的解决跨域的方案,只支持 get 请求
+        2. JSONP 是怎么工作的 ？
+            在一些网页有一些标签天生具有跨越能力来发送请求
+            比如: img link iframe 标签
+            JSONP 就是利用 script 标签的跨域能力来发送请求的
+        3. JSONP 的使用
+            （1）动态的创建一个 script 标签
+    </pre>
+
+            <div id="result">
+
+            </div>
+    <!-- 引入 app.js -->
+    <!-- 
+        利用 script 标签引入外部资源
+     -->
+    <!-- <script src="./js/app.js"></script> -->
+
+    <!-- 
+        以本地资源 file 协议打开这个页面， 
+        下面这段代码，以 http 协议引入 ./js/app.js 依然可用
+        不同协议依然可用，说明(验证)了 script 标签具有跨域的特性
+    -->
+
+    <script>
+    // 这样写依然可以
+    function handleData(data) {
+        const result = document.getElementById("result");
+        result.innerHTML = data.name;
+    }
+    </script>
+    <!-- <script src="http://127.0.0.1:5500/%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F/js/app.js"></script> -->
+
+    <!-- 验证 script 标签跨域请求回来的是 js 代码才能解析 -->
+    <script src="http://127.0.0.1:3000/jsonp"></script>
+
+</body>
+</html>
