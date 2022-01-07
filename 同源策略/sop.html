@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同源策略</title>
+</head>
+<body>
+    
+    <pre>
+
+        同源策略
+        1. 同源策略 Same-Origin-Policy 最早是由 Netscape 公司提出的一种安全策略
+        2. 同源: （1）协议相同
+                 （2）域名相同
+                 （3）端口号相同
+                 * 必须完全相同 *
+        3. 违背任何一条就是同源策略就是 “跨域”
+        note: * ajax 默认遵守同源策略 *
+
+
+        eg. 
+        http a.com 8000 port 《====》  http a.com 8000 port  完全一致
+
+        同源策略 根本 -> 同一个来源
+
+
+
+    </pre>
+
+    <h1>案例</h1>
+
+    <button>点击获取用户数据</button>
+
+
+
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        btn.onclick = function () {
+            const xhr = new XMLHttpRequest();
+            // xhr.open('GET', 'http://127.0.0.1:9000/data');
+            // 这里因为是同源策略所以可以简写如下
+            xhr.open('GET', '/data');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log(xhr.response);
+                }
+            }
+            }
+        }
+    </script>
+
+</body>
+</html>
