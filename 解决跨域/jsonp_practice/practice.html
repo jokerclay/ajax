@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONP 实践</title>
+</head>
+<body>
+
+    <h3>需求</h3>
+    <p>用户输入用户名，input 框失焦，向服务端发送请求验证用户名是否可用</p>
+    用户名: 
+    <input type="text">
+    <p></p>
+
+    <script>
+        // 获取元素
+        let input =document.getElementsByTagName('input')[0];
+        let p =document.getElementsByTagName('p')[1];
+
+        function handleData(data) {
+            p.innerHTML = data.invalid;
+        }
+        input.onblur = function () {
+            // 1. 创建 script 标签
+            let script = document.createElement('script');
+            // 2. 设置 src 属性
+            script.src='http://127.0.0.1:3000/username';
+            // 3. 将创建的 script 标签 插入文档
+            document.body.appendChild(script);
+
+            input.style.backgroundColor = 'red';
+        }
+
+    </script>
+
+    
+    
+</body>
+</html>

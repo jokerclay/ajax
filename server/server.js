@@ -105,6 +105,16 @@ app.all('/jsonp', (request, response) => {
     response.send(`handleData(${str})`);
 })
 
+
+// ==== 原生 jsonp 实践 校验 username ====
+app.all('/username', (request, response) => {
+    const data = {
+        "invalid": "用户名不可用",
+    }
+    let str =JSON.stringify(data);
+    response.send(`handleData(${str})`);
+})
+
 app.listen(3000, () => {
     console.log('server started , listening on 3000 ...');
 });
