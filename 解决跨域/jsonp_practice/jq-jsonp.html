@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <title>jQuery JSONP 实践</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #545454;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>需求</h3>
+    <button>点击返回数据</button>
+    <div id="result">
+
+    </div>
+
+    <script>
+        // console.log($)
+        $('button').eq(0).click(
+            function() {
+                // note: 这里的 callback=? 是固定的，意思是在 Jquery 中 注册函数
+                $.getJSON('http://127.0.0.1:3000/jq-jsonp?callback=?',function(data) {
+                    $('#result').html(`
+                        姓名: ${data.name},
+                        年龄: ${data.age},
+                    `)
+                })
+            }
+        )
+
+
+
+    </script>
+
+    
+    
+</body>
+</html>

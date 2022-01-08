@@ -115,6 +115,24 @@ app.all('/username', (request, response) => {
     response.send(`handleData(${str})`);
 })
 
+
+// ==== Jquery 中 使用 jsonp ====
+app.all('/jq-jsonp', (request, response) => {
+    const data = {
+        "name": "clay",
+        "age": 18,
+    }
+
+    // Jquery 中的固定的注册的 callback=?
+    let cb = request.query.callback
+
+
+    let str =JSON.stringify(data);
+    response.send(`${cb}(${str})`);
+})
+
+
+
 app.listen(3000, () => {
     console.log('server started , listening on 3000 ...');
 });
